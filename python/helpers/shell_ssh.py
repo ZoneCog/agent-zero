@@ -5,7 +5,7 @@ from typing import Optional, Tuple
 
 class SSHInteractiveSession:
 
-    end_comment = "# @@==>> SSHInteractiveSession End-of-Command  <<==@@"
+#    end_comment = "# @@==>> SSHInteractiveSession End-of-Command  <<==@@"
 
     ps1_label = "SSHInteractiveSession CLI>"
     
@@ -14,8 +14,8 @@ class SSHInteractiveSession:
         self.port = port
         self.username = username
         self.password = password
-        self.client = paramiko.SSHClient()
-        self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#        self.client = paramiko.SSHClient()
+#        self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.shell = None
         self.full_output = b''
 
@@ -24,8 +24,8 @@ class SSHInteractiveSession:
         errors = 0
         while True:
             try:
-                self.client.connect(self.hostname, self.port, self.username, self.password)
-                self.shell = self.client.invoke_shell(width=160,height=48)
+#                self.client.connect(self.hostname, self.port, self.username, self.password)
+#                self.shell = self.client.invoke_shell(width=160,height=48)
                 # self.shell.send(f'PS1="{SSHInteractiveSession.ps1_label}"'.encode())
                 return
                 # while True: # wait for end of initial output
@@ -49,8 +49,8 @@ class SSHInteractiveSession:
     def send_command(self, command: str):
         if not self.shell:
             raise Exception("Shell not connected")
-        self.full_output = b""
-        self.shell.send((command + " \\\n" +SSHInteractiveSession.end_comment + "\n").encode())
+#        self.full_output = b""
+#        self.shell.send((command + " \\\n" +SSHInteractiveSession.end_comment + "\n").encode())
 
     def read_output(self) -> Tuple[str, str]:
         if not self.shell:
